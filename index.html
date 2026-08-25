@@ -660,18 +660,97 @@
           <span class="summary-hint">Expand/collapse form</span>
         </summary>
         <div class="form-wrap">
-          <div class="notice">
-            Registration is handled through a Microsoft-hosted form that is open to external guests and does not require sign-in. The event team will use those responses to confirm attendance and final joining details.
-          </div>
-          <iframe
-            class="registration-frame"
-            title="Executive Briefing registration form"
-            src="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR0Gr9i1mZnBMn3C33KiAcHpUMDFESVkxVkFLOFE4V01PQVpNRDBKUzJSSy4u&embed=true"
-            loading="lazy">
-          </iframe>
-          <p class="fallback-link">
-            If the form does not load, <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR0Gr9i1mZnBMn3C33KiAcHpUMDFESVkxVkFLOFE4V01PQVpNRDBKUzJSSy4u" target="_blank" rel="noopener">open the registration form in a new tab</a>.
-          </p>
+          <form id="registration-form">
+            <div class="notice">
+              Please complete the details below to register your interest. The event team will confirm your place and final joining details.
+            </div>
+
+            <div class="form-grid">
+              <div class="field">
+                <label for="title">Title</label>
+                <select id="title" name="title" required>
+                  <option value="">Select title</option>
+                  <option>Mr</option>
+                  <option>Ms</option>
+                  <option>Mrs</option>
+                  <option>Dr</option>
+                  <option>Professor</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="name">Full name</label>
+                <input id="name" name="name" type="text" autocomplete="name" placeholder="Jane Smith" required>
+              </div>
+              <div class="field">
+                <label for="role">Role</label>
+                <input id="role" name="role" type="text" placeholder="Chief Customer Officer" required>
+              </div>
+              <div class="field">
+                <label for="company">Company</label>
+                <input id="company" name="company" type="text" placeholder="Japan Airlines" required>
+              </div>
+              <div class="field">
+                <label for="msft-contact">Primary Microsoft contact</label>
+                <input id="msft-contact" name="msft-contact" type="text" placeholder="Microsoft contact name" required>
+              </div>
+              <div class="field">
+                <label for="email">Email address</label>
+                <input id="email" name="email" type="email" autocomplete="email" placeholder="name@company.com" required>
+              </div>
+              <div class="field full">
+                <label for="mobile">Mobile number</label>
+                <div class="phone-row">
+                  <select id="country-code" name="country-code" aria-label="Country calling code" required>
+                    <option value="">Country code</option>
+                    <option value="+351">Portugal (+351)</option>
+                    <option value="+44">United Kingdom (+44)</option>
+                    <option value="+1">United States / Canada (+1)</option>
+                    <option value="+33">France (+33)</option>
+                    <option value="+49">Germany (+49)</option>
+                    <option value="+34">Spain (+34)</option>
+                    <option value="+39">Italy (+39)</option>
+                    <option value="+31">Netherlands (+31)</option>
+                    <option value="+32">Belgium (+32)</option>
+                    <option value="+41">Switzerland (+41)</option>
+                    <option value="+45">Denmark (+45)</option>
+                    <option value="+46">Sweden (+46)</option>
+                    <option value="+47">Norway (+47)</option>
+                    <option value="+358">Finland (+358)</option>
+                    <option value="+353">Ireland (+353)</option>
+                    <option value="+81">Japan (+81)</option>
+                    <option value="+82">South Korea (+82)</option>
+                    <option value="+86">China (+86)</option>
+                    <option value="+852">Hong Kong (+852)</option>
+                    <option value="+65">Singapore (+65)</option>
+                    <option value="+61">Australia (+61)</option>
+                    <option value="+971">United Arab Emirates (+971)</option>
+                    <option value="+966">Saudi Arabia (+966)</option>
+                    <option value="+91">India (+91)</option>
+                    <option value="+55">Brazil (+55)</option>
+                    <option value="+52">Mexico (+52)</option>
+                    <option value="+27">South Africa (+27)</option>
+                    <option value="+90">Turkiye (+90)</option>
+                    <option value="+XX">Other (+XX)</option>
+                  </select>
+                  <input id="mobile" name="mobile" type="tel" autocomplete="tel" placeholder="7700 900000" required>
+                </div>
+              </div>
+              <div class="field full">
+                <label for="interests">Current high-priority interests</label>
+                <textarea id="interests" name="interests" placeholder="Ancillary revenue generation, improved customer service, contact centre efficiency, retail payments, loyalty, AI-enabled operations..." required></textarea>
+              </div>
+              <div class="field full">
+                <label for="dietary">Special dietary requirements</label>
+                <textarea id="dietary" name="dietary" placeholder="Please tell us about allergies, dietary preferences or accessibility needs."></textarea>
+              </div>
+            </div>
+
+            <button class="button primary" type="submit">Submit registration</button>
+            <div class="success" id="success-message" role="status">
+              Thank you. Your details have been captured. Please complete the Microsoft registration confirmation that opens next.
+            </div>
+          </form>
         </div>
       </details>
 
@@ -681,5 +760,17 @@
     </div>
   </main>
 
-</body>
+  <script>
+    const registrationFormUrl = "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR0Gr9i1mZnBMn3C33KiAcHpUMDFESVkxVkFLOFE4V01PQVpNRDBKUzJSSy4u";
+    const form = document.getElementById("registration-form");
+    const success = document.getElementById("success-message");
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      success.classList.add("visible");
+      success.focus();
+      window.open(registrationFormUrl, "_blank", "noopener");
+    });
+  </script></body>
 </html>
+
