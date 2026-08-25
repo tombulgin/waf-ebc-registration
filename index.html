@@ -748,7 +748,7 @@
 
             <button class="button primary" type="submit">Submit registration</button>
             <div class="success" id="success-message" role="status">
-              Thank you. Your details have been captured. Please complete the Microsoft registration confirmation that opens next.
+              Thank you for registering for the Executive Breakfast at the MSFT Office in Lisbon on Oct 14th. One of the team will be in touch shortly to confirm your attendance.
             </div>
           </form>
         </div>
@@ -761,16 +761,17 @@
   </main>
 
   <script>
-    const registrationFormUrl = "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR0Gr9i1mZnBMn3C33KiAcHpUMDFESVkxVkFLOFE4V01PQVpNRDBKUzJSSy4u";
     const form = document.getElementById("registration-form");
     const success = document.getElementById("success-message");
 
     form.addEventListener("submit", (event) => {
       event.preventDefault();
+      const fullName = String(new FormData(form).get("name") || "").trim();
+      const firstName = fullName.split(/\s+/)[0] || "there";
+      success.textContent = `Thank you for registering for the Executive Breakfast at the MSFT Office in Lisbon on Oct 14th ${firstName}. One of the team will be in touch shortly to confirm your attendance.`;
       success.classList.add("visible");
       success.focus();
-      window.open(registrationFormUrl, "_blank", "noopener");
+      form.reset();
     });
   </script></body>
 </html>
-
