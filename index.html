@@ -465,6 +465,21 @@
       display: block;
     }
 
+    .registration-frame {
+      width: 100%;
+      min-height: 980px;
+      margin-top: 18px;
+      border: 1px solid var(--cp-border);
+      border-radius: 16px;
+      background: var(--cp-surface);
+    }
+
+    .fallback-link {
+      margin-top: 14px;
+      color: var(--cp-text-muted);
+      font-size: 0.95rem;
+    }
+
     .footer {
       margin: 24px 0 8px;
       color: var(--cp-text-muted);
@@ -648,9 +663,15 @@
           <div class="notice">
             Registration is handled through a Microsoft-hosted form that is open to external guests and does not require sign-in. The event team will use those responses to confirm attendance and final joining details.
           </div>
-          <div class="hero-actions">
-            <a class="button primary" href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR0Gr9i1mZnBMn3C33KiAcHpUMDFESVkxVkFLOFE4V01PQVpNRDBKUzJSSy4u" target="_blank" rel="noopener">Open registration form</a>
-          </div>
+          <iframe
+            class="registration-frame"
+            title="Executive Briefing registration form"
+            src="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR0Gr9i1mZnBMn3C33KiAcHpUMDFESVkxVkFLOFE4V01PQVpNRDBKUzJSSy4u&embed=true"
+            loading="lazy">
+          </iframe>
+          <p class="fallback-link">
+            If the form does not load, <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR0Gr9i1mZnBMn3C33KiAcHpUMDFESVkxVkFLOFE4V01PQVpNRDBKUzJSSy4u" target="_blank" rel="noopener">open the registration form in a new tab</a>.
+          </p>
         </div>
       </details>
 
