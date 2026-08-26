@@ -659,7 +659,8 @@
           <span class="summary-hint">Expand/collapse form</span>
         </summary>
         <div class="form-wrap">
-          <form id="registration-form">
+          <form id="registration-form" name="waf-ebc-registration" method="POST" data-netlify="true">
+            <input type="hidden" name="form-name" value="waf-ebc-registration">
             <div class="notice">
               Please complete the details below to register your interest. The event team will confirm your place and final joining details.
             </div>
@@ -806,32 +807,14 @@
         return;
       }
 
-      const payload = {
-        title: String(data.get("title") || "").trim(),
-        name: String(data.get("name") || "").trim(),
-        role: String(data.get("role") || "").trim(),
-        company: String(data.get("company") || "").trim(),
-        microsoftContact: String(data.get("msft-contact") || "").trim(),
-        email,
-        mobile: `${String(data.get("country-code") || "").trim()} ${String(data.get("mobile") || "").trim()}`.trim(),
-        interests: String(data.get("interests") || "").trim(),
-        dietary: String(data.get("dietary") || "").trim(),
-        submittedAt: new Date().toISOString()
-      };
+      data.set("mobile", `${String(data.get("country-code") || "").trim()} ${String(data.get("mobile") || "").trim()}`.trim());
+      data.set("submitted-at", new Date().toISOString());
 
-      const response = await fetch("/api/register", {
+      const response = await fetch("/", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(data).toString()
       });
-
-      if (response.status === 409) {
-        showRegistrationMessage(
-          "You have already registered for the MSFT Executive Breakfast on Oct 14th.",
-          true
-        );
-        return;
-      }
 
       if (!response.ok) {
         showRegistrationMessage(
