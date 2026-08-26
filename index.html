@@ -232,20 +232,20 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 20px;
-      padding: 28px;
+      gap: 24px;
+      padding: 30px;
       background: var(--cp-bg-elevated);
     }
 
     .date-lockup {
       display: grid;
-      grid-template-columns: 88px 1fr;
-      gap: 16px;
+      grid-template-columns: 104px 1fr;
+      gap: 20px;
       align-items: center;
     }
 
     .date-box {
-      padding: 12px;
+      padding: 14px 12px;
       border-radius: 16px;
       background: var(--cp-accent);
       color: var(--cp-accent-fg);
@@ -255,21 +255,34 @@
 
     .date-box .month {
       display: block;
-      font-size: 0.85rem;
+      font-size: 0.92rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
     }
 
     .date-box .day {
       display: block;
-      font-size: 2.4rem;
+      font-size: 3rem;
       line-height: 1;
+    }
+
+    .date-copy strong {
+      display: block;
+      font-size: 1.16rem;
+      line-height: 1.2;
+    }
+
+    .date-copy div {
+      margin-top: 4px;
+      color: var(--cp-text-muted);
+      font-size: 1.03rem;
+      line-height: 1.35;
     }
 
     .fact-list {
       display: grid;
-      gap: 10px;
-      margin: 22px 0 0;
+      gap: 0;
+      margin: 24px 0 0;
       padding: 0;
       list-style: none;
     }
@@ -277,18 +290,32 @@
     .fact-list li {
       display: flex;
       justify-content: space-between;
-      gap: 12px;
-      padding: 12px 0;
+      gap: 18px;
+      padding: 16px 0;
       border-top: 1px solid var(--cp-border);
     }
 
     .fact-list strong {
       color: var(--cp-text);
+      font-size: 0.98rem;
     }
 
     .fact-list span {
       color: var(--cp-text-muted);
       text-align: right;
+      font-size: 0.98rem;
+      line-height: 1.35;
+    }
+
+    .event-note {
+      margin-top: auto;
+      padding: 16px;
+      border: 1px solid var(--cp-border);
+      border-radius: 0.625rem;
+      background: var(--cp-surface);
+      color: var(--cp-text-muted);
+      font-size: 0.98rem;
+      line-height: 1.45;
     }
 
     .grid {
@@ -555,7 +582,7 @@
                 <span class="month">Oct</span>
                 <span class="day">14</span>
               </div>
-              <div>
+              <div class="date-copy">
                 <strong>Wednesday morning</strong>
                 <div>World Aviation Festival 2026, day two</div>
               </div>
@@ -567,6 +594,9 @@
               <li><strong>EBC venue</strong><span>Microsoft EBC, Lisbon (room TBC)</span></li>
               <li><strong>Format</strong><span>Breakfast, showcase and executive discussion</span></li>
             </ul>
+          </div>
+          <div class="event-note">
+            Places are limited. Registration captures interest; the event team will confirm attendance and final joining details.
           </div>
         </aside>
       </section>
