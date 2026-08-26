@@ -793,7 +793,7 @@
       registration.querySelector(".confirmation-box").focus();
     }
 
-    form.addEventListener("submit", (event) => {
+    form.addEventListener("submit", async (event) => {
       event.preventDefault();
       const data = new FormData(form);
       const email = String(data.get("email") || "").trim().toLowerCase();
@@ -801,6 +801,41 @@
       if (registeredEmails().includes(email)) {
         showRegistrationMessage(
           "You have already registered for the MSFT Executive Breakfast on Oct 14th.",
+          true
+        );
+        return;
+      }
+
+      const payload = {
+        title: String(data.get("title") || "").trim(),
+        name: String(data.get("name") || "").trim(),
+        role: String(data.get("role") || "").trim(),
+        company: String(data.get("company") || "").trim(),
+        microsoftContact: String(data.get("msft-contact") || "").trim(),
+        email,
+        mobile: `${String(data.get("country-code") || "").trim()} ${String(data.get("mobile") || "").trim()}`.trim(),
+        interests: String(data.get("interests") || "").trim(),
+        dietary: String(data.get("dietary") || "").trim(),
+        submittedAt: new Date().toISOString()
+      };
+
+      const response = await fetch("/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      if (response.status === 409) {
+        showRegistrationMessage(
+          "You have already registered for the MSFT Executive Breakfast on Oct 14th.",
+          true
+        );
+        return;
+      }
+
+      if (!response.ok) {
+        showRegistrationMessage(
+          "Sorry, we could not submit your registration just now. Please try again or contact your Microsoft host.",
           true
         );
         return;
