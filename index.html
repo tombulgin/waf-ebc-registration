@@ -763,9 +763,17 @@
   <script>
     const form = document.getElementById("registration-form");
     const registration = document.getElementById("registration");
-    const storageKey = "waf-ebc-registered-emails";
+    const storageKey = "waf-ebc-registered-attendees";
 
-    function registeredEmails() {
+    function normalise(value) {
+      return String(value || "").trim().toLowerCase().replace(/\s+/g, " ");
+    }
+
+    function registrationKey(name, email) {
+      return `${normalise(name)}|${normalise(email)}`;
+    }
+
+    function registeredAttendees() {
       try {
         return JSON.parse(localStorage.getItem(storageKey) || "[]");
       } catch {
@@ -773,10 +781,10 @@
       }
     }
 
-    function saveRegisteredEmail(email) {
-      const emails = new Set(registeredEmails());
-      emails.add(email);
-      localStorage.setItem(storageKey, JSON.stringify([...emails]));
+    function saveRegisteredAttendee(name, email) {
+      const attendees = new Set(registeredAttendees());
+      attendees.add(registrationKey(name, email));
+      localStorage.setItem(storageKey, JSON.stringify([...attendees]));
     }
 
     function firstNameFrom(fullName) {
@@ -797,11 +805,12 @@
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
       const data = new FormData(form);
+      const fullName = String(data.get("name") || "").trim();
       const email = String(data.get("email") || "").trim().toLowerCase();
 
-      if (registeredEmails().includes(email)) {
+      if (registeredAttendees().includes(registrationKey(fullName, email))) {
         showRegistrationMessage(
-          "You have already registered for the MSFT Executive Breakfast on Oct 14th.",
+          `You have already registered for the event, ${firstNameFrom(fullName)}.<br>If you have any questions, please contact tombulgin@microsoft.com.`,
           true
         );
         return;
@@ -824,9 +833,9 @@
         return;
       }
 
-      saveRegisteredEmail(email);
+      saveRegisteredAttendee(fullName, email);
       showRegistrationMessage(
-        `Thank you for successfully registering for the Executive Breakfast at the MSFT Office in Lisbon on Oct 14th ${firstNameFrom(data.get("name"))}. One of the team will be in touch shortly to confirm your attendance.`
+        `Thank you for successfully registering for the Executive Breakfast at the MSFT Office in Lisbon on Oct 14th ${firstNameFrom(fullName)}. One of the team will be in touch shortly to confirm your attendance.`
       );
     });
   </script></body>
