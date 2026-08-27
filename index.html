@@ -499,12 +499,27 @@
       background: var(--cp-surface);
     }
 
+    .forms-embed-crop {
+      height: 2096px;
+      overflow: hidden;
+      background: var(--cp-surface);
+    }
+
     .forms-frame {
       display: block;
       width: 100%;
-      min-height: 1040px;
+      height: 2328px;
       border: 0;
       background: var(--cp-surface);
+    }
+
+    .privacy-note {
+      margin: 0;
+      padding: 16px;
+      border-top: 1px solid var(--cp-border);
+      color: var(--cp-text-muted);
+      font-size: 0.92rem;
+      line-height: 1.55;
     }
 
     .forms-fallback {
@@ -697,12 +712,17 @@
             Complete the form below to register your interest.
           </div>
           <div class="forms-panel">
-            <iframe
-              class="forms-frame"
-              title="Executive Briefing registration form"
-              src="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR0Gr9i1mZnBMn3C33KiAcHpUMDFESVkxVkFLOFE4V01PQVpNRDBKUzJSSy4u&embed=true"
-              loading="lazy">
-            </iframe>
+            <div class="forms-embed-crop">
+              <iframe
+                class="forms-frame"
+                title="Executive Briefing registration form"
+                src="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR0Gr9i1mZnBMn3C33KiAcHpUMDFESVkxVkFLOFE4V01PQVpNRDBKUzJSSy4u&embed=true"
+                loading="lazy">
+              </iframe>
+            </div>
+            <p class="privacy-note">
+              The information you provide will be used by Microsoft and event partners Adyen and Amicis Solutions to manage your registration, confirm your place, and support event logistics for this Executive Briefing. Your details will not be used for unrelated marketing communications.
+            </p>
             <p class="forms-fallback">
               If the form does not load, <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR0Gr9i1mZnBMn3C33KiAcHpUMDFESVkxVkFLOFE4V01PQVpNRDBKUzJSSy4u" target="_blank" rel="noopener">open the Microsoft registration form in a new tab</a>.
             </p>
