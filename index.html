@@ -397,7 +397,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      padding: 24px 30px;
+      padding: 22px 30px;
       cursor: pointer;
       list-style: none;
       font-weight: 800;
@@ -409,9 +409,26 @@
     }
 
     .summary-hint {
-      color: var(--cp-text-muted);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 154px;
+      padding: 10px 16px;
+      border: 1px solid var(--cp-accent);
+      border-radius: 0.625rem;
+      background: var(--cp-accent);
+      color: var(--cp-accent-fg);
       font-size: 0.95rem;
-      font-weight: 500;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .summary-hint::before {
+      content: "Expand";
+    }
+
+    details.registration[open] .summary-hint::before {
+      content: "Collapse";
     }
 
     .form-wrap {
@@ -670,10 +687,10 @@
         </div>
       </section>
 
-      <details class="panel registration" id="registration" open>
+      <details class="panel registration" id="registration">
         <summary>
           Register for the executive breakfast
-          <span class="summary-hint">Expand/collapse form</span>
+          <span class="summary-hint" aria-hidden="true"></span>
         </summary>
         <div class="form-wrap">
           <div class="notice">
